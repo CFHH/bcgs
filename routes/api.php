@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//http://localhost/api/zzw
+Route::get('/zzw', function (Request $request) {
+    return "api zzw";
+});
