@@ -60,3 +60,7 @@ GET;
 Route::post('testCsrf',function(){
     return 'Success!';
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
