@@ -14,11 +14,3 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
-
-//http://localhost/zzw/abc?name=1234
-Route::get('/zzw/{extra?}', function (Request $request, $extra1 = 'default') {
-	$fullurl = $request->fullurl();
-	$name = $request->input('name');
-    return "zzw " . $extra1 . ' ' . $name;
-    ;
-});
