@@ -29,6 +29,10 @@ Route::get('/zzw', function (Request $request) {
     return "web zzw";
 });
 
+Route::get('/zzw1', function (Request $request) {
+    return "web zzw";
+})->middleware('auth.basic');
+
 //http://localhost/zzw/abc?name=1234
 Route::get('/zzw2/{extra?}', function (Request $request, $extra1 = 'default') {
 	$fullurl = $request->fullurl();
