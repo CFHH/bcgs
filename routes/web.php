@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 
@@ -26,7 +30,10 @@ Route::get('/', function () {
 
 //测试
 Route::get('/zzw', function (Request $request) {
-    return "web zzw";
+	$poly64rev = -1 << 1;
+	//return $poly64rev;
+	//return sprintf('%x', $poly64rev);
+    return CRC::crc32f("php");
 });
 
 Route::get('/zzw1', function (Request $request) {
@@ -65,6 +72,12 @@ Route::post('testCsrf',function(){
     return 'Success!';
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/redisget', function (Request $request) {
+	$name = Redis::get('name');
+    return "redisget " . $name;
+});
+Route::get('/redisset', function (Request $request) {
+	Redis::set('name', 'Taylor');
+    return "redisset";
+});
