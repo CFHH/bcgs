@@ -53,19 +53,23 @@ class ApiRegisterController extends Controller
     protected function create(Request $request)
     {
         $crc = \CRC::crc64($request->input('email'));
-        return User::create([
-            'id_crc64' => $crc,
-            'email' => $request->input('email'),
-            'name' => $request->input('name'),
-            'password' => bcrypt($request->input('password')),
-        ]);
-        /*
-        return User::create([
-            'id_crc64' => CRC::crc64($data['email']),
-            'email' => $data['email'],
-            'name' => $data['name'],
-            'password' => bcrypt($data['password']),
-        ]);
-        */
+        try
+        {
+            $result = User::create([
+                'id_crc64' => $crc,
+                'email' => $request->input('email'),
+                'name' => $request->input('name'),
+                'password' => bcrypt($request->input('password')),
+            ]);
+        }
+        catch (Exception $e)
+        {
+            return 'doesn"t come here';
+        }
+        finally
+        {
+            return 'error';
+        }
+        return 'success';
     }
 }
