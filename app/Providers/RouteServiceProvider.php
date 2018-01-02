@@ -35,11 +35,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
+        $this->mapBcgsRoutes();        
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-
-        //
     }
 
     /**
@@ -69,5 +67,13 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapBcgsRoutes()
+    {
+        Route::prefix('bcgs')
+             ->middleware('api')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/bcgs_routes.php'));
     }
 }

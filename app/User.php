@@ -10,13 +10,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
 
+    protected $primaryKey = 'id_crc64';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id_crc64', 'email', 'name', 'password',
     ];
 
     /**
@@ -25,6 +28,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 }
