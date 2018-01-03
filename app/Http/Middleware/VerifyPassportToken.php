@@ -12,7 +12,8 @@ class VerifyPassportToken extends Authenticate
     protected function authenticate(array $guards)
     {
         if ($this->auth->guard('api')->check())
-            return $this->auth->shouldUse('api');
-        throw new UnauthorizedHttpException('', 'Unauthenticated');
+			return $this->auth->shouldUse('api');
+        else
+			throw new UnauthorizedHttpException('', 'Unauthenticated');
     }
 }
