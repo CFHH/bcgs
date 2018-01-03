@@ -60,6 +60,15 @@ class ApiAuthController extends Controller
         return $response;
     }
 
+    public function logout(Request $request)
+    {
+        $user = \Auth::guard('api')->user();
+        if ($user == NULL)
+            return "logout fail: no user";
+        $user->token()->delete();
+        return response()->json(['message' => '登出成功', 'status_code' => 200, 'data' => null]);
+    }
+
     public function behave(Request $request)
     {
         return "behave";

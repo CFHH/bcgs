@@ -15,6 +15,10 @@ Route::get('/login', 'Auth\ApiAuthController@login');
 
 Route::post('/login', 'Auth\ApiAuthController@login');
 
-Route::get('/behave', 'Auth\ApiAuthController@behave');
+Route::get('/logout', 'Auth\ApiAuthController@logout');
 
-Route::post('/behave', 'Auth\ApiAuthController@behave');
+Route::post('/logout', 'Auth\ApiAuthController@logout');
+
+Route::get('/behave', 'Auth\ApiAuthController@behave')->middleware('vpt');
+
+Route::post('/behave', 'Auth\ApiAuthController@behave')->middleware('vpt');

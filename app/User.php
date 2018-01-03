@@ -31,7 +31,13 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function findForPassport($username) {
+    public function findForPassport($username)
+    {
         return $this->where('id_crc64', $username)->first();
+    }
+
+    public function getKeyName()
+    {
+        return 'id_crc64';
     }
 }
