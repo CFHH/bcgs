@@ -2,12 +2,19 @@
 
 use Illuminate\Http\Request;
 
-/*
-Route::get('/register', function (Request $request)
+Route::get('/test', function (Request $request)
 {
-    return "bcgs register";
+    return "test";
 });
-*/
-Route::get('/register', 'Auth\ApiRegisterController@create');
 
-Route::post('/register', 'Auth\ApiRegisterController@create');
+Route::get('/register', 'Auth\ApiAuthController@register');
+
+Route::post('/register', 'Auth\ApiAuthController@register');
+
+Route::get('/login', 'Auth\ApiAuthController@login');
+
+Route::post('/login', 'Auth\ApiAuthController@login');
+
+Route::get('/behave', 'Auth\ApiAuthController@behave');
+
+Route::post('/behave', 'Auth\ApiAuthController@behave');

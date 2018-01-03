@@ -30,4 +30,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function findForPassport($username) {
+        return $this->where('id_crc64', $username)->first();
+    }
 }
