@@ -5,29 +5,37 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class ApiAuthController extends Controller
 {
-    //use  AuthenticatesUsers;
-
     protected function register(Request $request)
     {
-        $crc = \CRC::crc64($request->input('email'));
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'email' => 'required|string|email|max:50',
+            'name' => 'required|string|max:20|min:6',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        if ($validator->fails())
+            return "参数错误";
+
+        $crc = \CRC::crc64($data['email']);
         $result = NULL;
         try
         {
             $result = User::create([
                 'id_crc64' => $crc,
-                'email' => $request->input('email'),
-                'name' => $request->input('name'),
-                'password' => bcrypt($request->input('password')),
+                'email' => $data['email'],
+                'name' => $data['name'],
+                'password' => bcrypt($data['password']),
             ]);
         }
         catch (QueryException $e)
         {
-            return 'email exists ' . $request->input('email');
+            return 'email exists ' . $data['email'];
         }
         finally
         {
